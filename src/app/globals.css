@@ -1,0 +1,262 @@
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+/* VirtuoVideo — Dark Only. No light theme. */
+:root {
+    --background: oklch(0.13 0 0); /* #0a0a0a */
+    --foreground: oklch(1 0 0); /* #ffffff */
+    --card: oklch(0.17 0 0); /* #111111 */
+    --card-foreground: oklch(1 0 0);
+    --popover: oklch(0.17 0 0);
+    --popover-foreground: oklch(1 0 0);
+    --primary: oklch(1 0 0); /* White primary actions */
+    --primary-foreground: oklch(0.13 0 0);
+    --secondary: oklch(0.24 0 0); /* #222222 */
+    --secondary-foreground: oklch(1 0 0);
+    --muted: oklch(0.24 0 0);
+    --muted-foreground: oklch(0.49 0 0); /* #666666 */
+    --accent: oklch(0.55 0.22 27); /* #DC2626 red */
+    --accent-foreground: oklch(1 0 0);
+    --destructive: oklch(0.59 0.23 25); /* #EF4444 */
+    --destructive-foreground: oklch(1 0 0);
+    --border: oklch(0.24 0 0); /* #222222 */
+    --input: oklch(0.24 0 0);
+    --ring: oklch(0.55 0.22 27); /* Red focus ring */
+    --success: oklch(0.72 0.19 155); /* #22C55E */
+    --warning: oklch(0.77 0.16 75); /* #F59E0B */
+    --radius: 0.25rem;
+}
+
+/* Dark class mirrors root — we are always dark */
+.dark {
+    --background: oklch(0.13 0 0);
+    --foreground: oklch(1 0 0);
+    --card: oklch(0.17 0 0);
+    --card-foreground: oklch(1 0 0);
+    --popover: oklch(0.17 0 0);
+    --popover-foreground: oklch(1 0 0);
+    --primary: oklch(1 0 0);
+    --primary-foreground: oklch(0.13 0 0);
+    --secondary: oklch(0.24 0 0);
+    --secondary-foreground: oklch(1 0 0);
+    --muted: oklch(0.24 0 0);
+    --muted-foreground: oklch(0.49 0 0);
+    --accent: oklch(0.55 0.22 27);
+    --accent-foreground: oklch(1 0 0);
+    --destructive: oklch(0.59 0.23 25);
+    --destructive-foreground: oklch(1 0 0);
+    --border: oklch(0.24 0 0);
+    --input: oklch(0.24 0 0);
+    --ring: oklch(0.55 0.22 27);
+    --success: oklch(0.72 0.19 155);
+    --warning: oklch(0.77 0.16 75);
+}
+
+@theme inline {
+    --font-sans: var(--font-inter);
+    --font-display: var(--font-bebas-neue);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-success: var(--success);
+    --color-warning: var(--warning);
+    --radius-sm: calc(var(--radius) - 2px);
+    --radius-md: var(--radius);
+    --radius-lg: calc(var(--radius) + 2px);
+
+    /* VirtuoVideo Typography Scale */
+    --text-hero: clamp(3rem, 8vw, 6rem);
+    --text-hero--line-height: 0.95;
+    --text-hero--letter-spacing: 0.02em;
+
+    /* VirtuoVideo Layout */
+    --max-width-content: 1280px;
+    --max-width-wide: 1440px;
+    --max-width-prose: 65ch;
+
+    --animate-accordion-down: accordion-down 0.2s ease-out;
+    --animate-accordion-up: accordion-up 0.2s ease-out;
+
+    @keyframes accordion-down {
+        from {
+            height: 0;
+        }
+        to {
+            height: var(--radix-accordion-content-height);
+        }
+    }
+
+    @keyframes accordion-up {
+        from {
+            height: var(--radix-accordion-content-height);
+        }
+        to {
+            height: 0;
+        }
+    }
+
+    --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
+
+    --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
+    @keyframes shimmer-slide {
+        to {
+            transform: translate(calc(100cqw - 100%), 0);
+        }
+    }
+    @keyframes spin-around {
+        0% {
+            transform: translateZ(0) rotate(0);
+        }
+        15%,
+        35% {
+            transform: translateZ(0) rotate(90deg);
+        }
+        65%,
+        85% {
+            transform: translateZ(0) rotate(270deg);
+        }
+        100% {
+            transform: translateZ(0) rotate(360deg);
+        }
+    }
+    --animate-marquee: marquee var(--duration) infinite linear;
+    --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+    @keyframes marquee {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(calc(-100% - var(--gap)));
+        }
+    }
+    @keyframes marquee-vertical {
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(calc(-100% - var(--gap)));
+        }
+    }
+    --animate-pulse: pulse var(--duration) ease-out infinite;
+    @keyframes pulse {
+        0%,
+        100% {
+            boxshadow: 0 0 0 0 var(--pulse-color);
+        }
+        50% {
+            boxshadow: 0 0 0 8px var(--pulse-color);
+        }
+    }
+}
+
+/* ── VirtuoVideo Background Temperatures ── */
+:root {
+    --bg-pure: #0a0a0a;
+    --bg-warm: #0f0d0b;
+    --bg-cool: #0a0c10;
+    --bg-lifted: #111111;
+    --bg-elevated: #141414;
+}
+
+/* ── Noise Texture Overlay ── */
+.noise {
+    position: relative;
+}
+.noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+}
+
+/* ── Dot Grid Pattern ── */
+.dot-grid {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* ── Dot Grid (dark dots, for light/white sections) ── */
+.dot-grid-dark {
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* ── 12-Column Grid System (basement-style structural rhythm) ── */
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 0.75rem;
+    width: 100%;
+    max-width: var(--max-width-wide);
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+@media (min-width: 1024px) {
+    .grid-layout {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        column-gap: 0.75rem;
+        padding-inline: 2rem;
+    }
+}
+
+/* ── Dotted cell texture (for bordered tiles) ── */
+.with-dots {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+/* ── Diagonal hairlines (decorative fill) ── */
+.with-diagonal-lines {
+    background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 0.06) 0,
+        rgba(255, 255, 255, 0.06) 1px,
+        transparent 1px,
+        transparent 7px
+    );
+}
+
+/* ── Hairline-bordered tile ── */
+.tile-border {
+    position: relative;
+}
+.tile-border::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
