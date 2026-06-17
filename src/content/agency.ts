@@ -244,7 +244,7 @@ export const agencyStats = [
     { value: 10000, suffix: '+', label: 'Virtual Tours Produced' },
     { value: 500, suffix: '+', label: 'Businesses Served' },
     { value: 15, suffix: '+', label: 'Years of Experience' },
-    { value: 2, suffix: ' Countries', label: 'Canada & United States' }
+    { value: 98, suffix: '%', label: 'Client Retention' }
 ];
 
 /* ─────────────── Virtuo Video link-out ─────────────── */

@@ -19,6 +19,7 @@ export default function DigitalMarketingPage() {
                 meta='SEO · GEO · Ads'
                 statement='Traditional SEO chases blue links. We make you visible across Search, Maps, AI Overviews and ChatGPT — then convert it.'
                 bgImage='/images/bts/commercial-stage.jpg'
+                bodyImage='/images/bts/full-production-set.jpg'
                 capabilities={[
                     { title: 'SEO & Local SEO', detail: 'Organic rankings, local pack visibility, and on-page optimization.' },
                     { title: 'GEO & AI Search', detail: 'Show up in Google AI Overviews and ChatGPT-style discovery.' },
@@ -26,6 +27,24 @@ export default function DigitalMarketingPage() {
                     { title: 'Google Ads', detail: 'Intent-based search campaigns, managed end to end.' },
                     { title: 'Meta Ads', detail: 'Instagram & Facebook demand generation and retargeting.' },
                     { title: 'Tracking & Analytics', detail: 'Conversion tracking, reporting, and ongoing optimization.' }
+                ]}
+                painPoints={[
+                    'You rank on Google but the phone still isn’t ringing.',
+                    'Competitors show up in Maps and AI answers — you don’t.',
+                    'You’re spending on ads with no clear idea what’s working.',
+                    'No one owns your tracking, so results are a black box.'
+                ]}
+                process={[
+                    { title: 'Audit', detail: 'We map your visibility across search, maps, AI, and paid — and find every gap.' },
+                    { title: 'Setup', detail: 'Profiles, tracking, and campaigns configured properly from the ground up.' },
+                    { title: 'Launch', detail: 'SEO, Google & Meta campaigns go live with conversion-ready landing pages.' },
+                    { title: 'Optimize', detail: 'Weekly optimization against real conversions, with clear monthly reporting.' }
+                ]}
+                outcomes={[
+                    'Show up everywhere customers search — Google, Maps, AI, and paid.',
+                    'A predictable pipeline of qualified leads and bookings.',
+                    'Full visibility into spend, performance, and ROI.',
+                    'One accountable team for the entire funnel.'
                 ]}
                 faq={[
                     {

@@ -19,6 +19,7 @@ export default function WebDevelopmentPage() {
                 meta='Next.js · Vercel'
                 statement='A campaign is only as good as the site it points to. We build the infrastructure that makes marketing convert.'
                 bgImage='/images/bts/cooking-show-setup.jpg'
+                bodyImage='/images/bts/steadicam-operator.jpg'
                 capabilities={[
                     { title: 'Next.js + Vercel', detail: 'Modern React architecture on a global edge network.' },
                     { title: 'Technical SEO', detail: 'Clean semantic structure and SEO-readiness from day one.' },
@@ -26,6 +27,24 @@ export default function WebDevelopmentPage() {
                     { title: 'Core Web Vitals', detail: 'Top performance scores on every device.' },
                     { title: 'Mobile-First', detail: 'Designed for the way customers actually browse.' },
                     { title: 'Scalable Systems', detail: 'Reusable, modular structure that grows with your business.' }
+                ]}
+                painPoints={[
+                    'Your site is slow — and you’re losing visitors before they convert.',
+                    'It looks fine but doesn’t rank or generate leads.',
+                    'Every small change needs a developer and takes weeks.',
+                    'It breaks on mobile, where most of your traffic is.'
+                ]}
+                process={[
+                    { title: 'Discovery', detail: 'We audit your goals, content, and current performance.' },
+                    { title: 'Design', detail: 'Conversion-focused UX and a design system built to scale.' },
+                    { title: 'Build', detail: 'Engineered on Next.js + Vercel — fast, SEO-ready, mobile-first.' },
+                    { title: 'Launch', detail: 'Deployed on a global edge network with analytics wired in.' }
+                ]}
+                outcomes={[
+                    'A site that loads instantly and ranks out of the box.',
+                    'Higher conversion rates from the same traffic.',
+                    'Infrastructure your campaigns actually perform on.',
+                    'Easy to update and built to scale.'
                 ]}
                 faq={[
                     {

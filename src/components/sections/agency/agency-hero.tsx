@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import { AgencyButton } from '@/components/ui/agency-button';
+import { MatrixText } from '@/components/ui/matrix-text';
 import { QuoteFormPanel } from '@/components/ui/quote-form-panel';
 import { agencyHero } from '@/content/agency';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
@@ -36,9 +37,11 @@ export function AgencyHero() {
 
                         {/* Headline + arrow */}
                         <div className='mt-8 flex items-start justify-between gap-6'>
-                            <h1 className='font-display text-6xl leading-[0.85] tracking-tight text-neutral-900 uppercase md:text-8xl lg:text-9xl'>
+                            <MatrixText
+                                as='h1'
+                                className='font-display text-6xl leading-[0.85] tracking-tight text-neutral-900 uppercase md:text-8xl lg:text-9xl'>
                                 {agencyHero.headline}
-                            </h1>
+                            </MatrixText>
                             <ArrowUpRight
                                 className='mt-1 hidden h-12 w-12 shrink-0 text-neutral-900 sm:block md:h-20 md:w-20'
                                 strokeWidth={1.5}

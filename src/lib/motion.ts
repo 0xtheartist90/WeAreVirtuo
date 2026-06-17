@@ -7,7 +7,7 @@ export const MOTION = {
         normal: 0.35, // section reveals, blur-fade
         slow: 0.5 // hero entrance, Lamp Effect, dramatic moments
     },
-    ease: [0.25, 0.1, 0.25, 1.0] as const, // custom ease-out — cinematic, not bouncy
+    ease: [0.22, 1, 0.36, 1] as const, // premium expo-out — smooth, refined deceleration
     stagger: 0.1, // delay between staggered children
     viewport: {
         once: true, // animate only on first entry

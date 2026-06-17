@@ -153,8 +153,8 @@ function WorkRow({ item, index, onOpen }: { item: PortfolioItem; index: number; 
                     <img
                         src={item.thumbnail}
                         alt={item.title}
-                        className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ${
-                            hovering && item.videoSrc ? 'scale-105 opacity-0' : 'scale-100 opacity-100'
+                        className={`absolute inset-0 h-full w-full object-cover transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                            hovering && item.videoSrc ? 'scale-[1.07] opacity-0' : 'scale-100 opacity-100'
                         }`}
                     />
                     {item.videoSrc && (

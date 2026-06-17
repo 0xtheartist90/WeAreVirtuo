@@ -1,6 +1,6 @@
 'use client';
 
-import { CharacterReveal } from '@/components/ui/character-reveal';
+import { MatrixText } from '@/components/ui/matrix-text';
 import { visibilityChannels } from '@/content/agency';
 
 import { Bot, MapPin, MessageSquare, Search, Sparkles, Target } from 'lucide-react';
@@ -35,11 +35,12 @@ export function AgencyApproach() {
                 <div className='relative flex flex-col justify-center px-4 py-16 md:px-10 md:py-24 lg:px-14'>
                     <div className='dot-grid pointer-events-none absolute inset-0 opacity-30' />
                     <div className='relative'>
-                        <CharacterReveal
+                        <MatrixText
                             as='h2'
-                            className='font-display text-foreground text-4xl leading-[0.92] tracking-tight uppercase md:text-6xl'>
+                            trigger='view'
+                            className='font-display text-foreground block text-4xl leading-[0.92] tracking-tight uppercase md:text-6xl'>
                             Rankings Alone Are No Longer Enough
-                        </CharacterReveal>
+                        </MatrixText>
                         <p className='mt-5 max-w-lg text-lg text-white/75'>
                             Your customers discover businesses across Google, Maps, AI Overviews, and ChatGPT-style
                             search. We make sure you appear in every one — then turn that visibility into booked
@@ -58,12 +59,14 @@ export function AgencyApproach() {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, margin: '-60px' }}
                                         transition={{ duration: 0.4, delay: idx * 0.05 }}
-                                        className='group flex items-center gap-4 border-b border-white/10 py-4'>
-                                        <Icon className='text-accent h-5 w-5 shrink-0' strokeWidth={1.5} />
-                                        <span className='text-foreground w-40 shrink-0 text-sm font-semibold tracking-wide uppercase'>
+                                        className='group flex items-center gap-4 border-b border-white/10 py-4 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:gap-5 hover:border-white/25'>
+                                        <Icon className='text-accent h-5 w-5 shrink-0 transition-transform duration-300 group-hover:scale-110' strokeWidth={1.5} />
+                                        <span className='text-foreground w-40 shrink-0 text-sm font-semibold tracking-wide uppercase transition-transform duration-300 group-hover:translate-x-1'>
                                             {channel.label}
                                         </span>
-                                        <span className='hidden text-sm text-white/55 sm:block'>{channel.detail}</span>
+                                        <span className='hidden text-sm text-white/55 transition-colors duration-300 group-hover:text-white/80 sm:block'>
+                                            {channel.detail}
+                                        </span>
                                     </motion.div>
                                 );
                             })}

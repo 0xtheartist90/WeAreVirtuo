@@ -403,7 +403,50 @@
     * {
         @apply border-border outline-ring/50;
     }
+    html {
+        scroll-behavior: smooth;
+    }
     body {
         @apply bg-background text-foreground;
+    }
+    /* Premium accent text selection */
+    ::selection {
+        background-color: oklch(0.55 0.22 27);
+        color: #ffffff;
+    }
+}
+
+/* ── Premium hover utilities ── */
+/* Smooth lift for cards/tiles */
+.hover-lift {
+    transition:
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.4s ease;
+    will-change: transform;
+}
+.hover-lift:hover {
+    transform: translateY(-4px);
+}
+
+/* Refined media zoom (apply to an <img> inside a `group`) */
+.media-zoom {
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+.group:hover .media-zoom {
+    transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    .hover-lift,
+    .media-zoom {
+        transition: none;
+    }
+    .hover-lift:hover,
+    .group:hover .media-zoom {
+        transform: none;
     }
 }

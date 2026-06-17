@@ -1,7 +1,8 @@
 import Link from 'next/link';
 
-import { agencyCapabilities } from '@/content/agency';
+import { MatrixText } from '@/components/ui/matrix-text';
 import { serviceGlyphs } from '@/components/ui/service-glyphs';
+import { agencyCapabilities } from '@/content/agency';
 
 import { ArrowUpRight } from 'lucide-react';
 
@@ -14,9 +15,12 @@ export function AgencyServicesIndex() {
                 <div className='col-span-full mb-8 flex items-end justify-between border-b border-white/15 pb-4 lg:col-start-2 lg:col-end-12'>
                     <div>
                         <p className='text-accent mb-2 font-mono text-[11px] tracking-widest uppercase'>[ Services ]</p>
-                        <h2 className='font-display text-foreground text-4xl tracking-tight uppercase md:text-6xl'>
+                        <MatrixText
+                            as='h2'
+                            trigger='view'
+                            className='font-display text-foreground block text-4xl tracking-tight uppercase md:text-6xl'>
                             What We Do
-                        </h2>
+                        </MatrixText>
                     </div>
                     <Link
                         href='/services'

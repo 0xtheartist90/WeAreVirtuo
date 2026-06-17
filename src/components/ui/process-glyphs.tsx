@@ -1,6 +1,6 @@
 /**
  * "How we work" glyphs — minimal abstract line marks, same delicate style as the
- * service glyphs but a distinct set (target, chevrons, rising arc).
+ * service glyphs but a distinct set (compass, chevrons, ascending trend).
  */
 import type { SVGProps } from 'react';
 
@@ -16,15 +16,12 @@ const base = (props: GlyphProps) => ({
     ...props
 });
 
-/** Target — small circle with crosshair ticks (strategy / aim) */
-export function GlyphTarget(props: GlyphProps) {
+/** Compass — a four-point star (strategy / direction) */
+export function GlyphCompass(props: GlyphProps) {
     return (
         <svg {...base(props)}>
-            <circle cx='20' cy='20' r='6' />
-            <path d='M20 11 L20 6.5' />
-            <path d='M20 29 L20 33.5' />
-            <path d='M29 20 L33.5 20' />
-            <path d='M11 20 L6.5 20' />
+            <path d='M20 6 L22.4 17.6 L34 20 L22.4 22.4 L20 34 L17.6 22.4 L6 20 L17.6 17.6 Z' />
+            <circle cx='20' cy='20' r='1.2' fill='currentColor' stroke='none' />
         </svg>
     );
 }
@@ -39,17 +36,14 @@ export function GlyphChevrons(props: GlyphProps) {
     );
 }
 
-/** Rise — a sun/arc rising over a baseline (growth) */
-export function GlyphRise(props: GlyphProps) {
+/** Ascend — a rising trend line with an arrow (growth) */
+export function GlyphAscend(props: GlyphProps) {
     return (
         <svg {...base(props)}>
-            <path d='M7 27 L33 27' />
-            <path d='M12 27 A8 8 0 0 1 28 27' />
-            <path d='M20 13 L20 9.5' />
-            <path d='M27.78 15.22 L30.3 12.7' />
-            <path d='M12.22 15.22 L9.7 12.7' />
+            <path d='M7 28 L15 21.5 L21 24.5 L31 12' />
+            <path d='M24 12 L31 12 L31 19' />
         </svg>
     );
 }
 
-export const processGlyphs = [GlyphTarget, GlyphChevrons, GlyphRise];
+export const processGlyphs = [GlyphCompass, GlyphChevrons, GlyphAscend];

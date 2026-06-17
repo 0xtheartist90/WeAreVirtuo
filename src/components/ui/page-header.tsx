@@ -1,4 +1,4 @@
-import { CharacterReveal } from '@/components/ui/character-reveal';
+import { MatrixText } from '@/components/ui/matrix-text';
 
 import { ArrowUpRight } from 'lucide-react';
 
@@ -22,11 +22,11 @@ function HeaderInner({ index, label, title, intro, meta }: Omit<PageHeaderProps,
 
             {/* Oversized title + arrow — full width */}
             <div className='flex items-start justify-between gap-6'>
-                <CharacterReveal
+                <MatrixText
                     as='h1'
                     className='font-display text-foreground text-6xl leading-[0.9] tracking-tight uppercase md:text-8xl lg:text-9xl'>
                     {title}
-                </CharacterReveal>
+                </MatrixText>
                 <ArrowUpRight className='text-accent mt-2 h-10 w-10 shrink-0 md:h-16 md:w-16' strokeWidth={1.5} />
             </div>
 

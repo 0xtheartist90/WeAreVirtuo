@@ -1,9 +1,12 @@
 'use client';
 
 import { BlurFade } from '@/components/ui/blur-fade';
+import { MatrixText } from '@/components/ui/matrix-text';
 import { NumberTicker } from '@/components/ui/number-ticker';
 import { agencyStats } from '@/content/agency';
+import { useReducedMotion } from '@/hooks/use-reduced-motion';
 import { MOTION } from '@/lib/motion';
+import { videoUrl } from '@/lib/video';
 
 import { Building2, Hotel, MapPinned, UtensilsCrossed } from 'lucide-react';
 
@@ -14,39 +17,63 @@ const hospitality = [
     { icon: Building2, label: 'Hospitality Groups' }
 ];
 
-/* Light section — a stark white band to break up the black. */
+const RESULTS_VIDEO = 'videos/portfolio/nome-fort-york.mp4';
+const RESULTS_POSTER = '/images/portfolio/nome.png';
+
+/* Light section — compact white band: header + small video, then a stat row. */
 export function AgencyResults() {
+    const reducedMotion = useReducedMotion();
+
     return (
-        <section id='results' className='relative bg-white py-20 text-neutral-900 md:py-28'>
+        <section id='results' className='relative bg-white py-14 text-neutral-900 md:py-20'>
             <div className='dot-grid-dark pointer-events-none absolute inset-0 opacity-60' />
 
             <div className='relative mx-auto max-w-[var(--max-width-content)] px-4 md:px-8'>
-                <div className='mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+                {/* Header + small video */}
+                <div className='flex flex-col gap-8 md:flex-row md:items-end md:justify-between'>
                     <div>
                         <p className='text-accent mb-2 font-mono text-[11px] tracking-widest uppercase'>
                             [ Proven at Scale ]
                         </p>
-                        <h2 className='font-display text-5xl leading-[0.9] tracking-tight text-neutral-900 uppercase md:text-7xl'>
-                            Trusted Across
-                            <br />
-                            North America
-                        </h2>
+                        <MatrixText
+                            as='h2'
+                            trigger='view'
+                            className='font-display block text-4xl leading-[0.9] tracking-tight text-neutral-900 uppercase md:text-6xl'>
+                            Trusted Across North America
+                        </MatrixText>
+                        <p className='mt-4 max-w-md text-base text-neutral-600'>
+                            Hundreds of hospitality and multi-location businesses getting found and growing.
+                        </p>
                     </div>
-                    <p className='max-w-sm text-base text-neutral-600'>
-                        Hundreds of hospitality and multi-location businesses getting found and growing — across Canada
-                        and the United States.
-                    </p>
+                    <div className='relative w-full shrink-0 overflow-hidden border border-neutral-200 md:w-72'>
+                        {!reducedMotion ? (
+                            <video
+                                src={videoUrl(RESULTS_VIDEO)}
+                                poster={RESULTS_POSTER}
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                className='aspect-video w-full object-cover'
+                            />
+                        ) : (
+                            <img src={RESULTS_POSTER} alt='' className='aspect-video w-full object-cover' />
+                        )}
+                        <span className='border-accent absolute top-2.5 left-2.5 h-4 w-4 border-t border-l' />
+                        <span className='border-accent absolute right-2.5 bottom-2.5 h-4 w-4 border-r border-b' />
+                    </div>
                 </div>
 
-                <div className='grid grid-cols-2 gap-px border border-neutral-200 bg-neutral-200 md:grid-cols-4'>
+                {/* Stat row */}
+                <div className='mt-10 grid grid-cols-2 gap-px border border-neutral-200 bg-neutral-200 md:grid-cols-4'>
                     {agencyStats.map((stat, idx) => (
                         <BlurFade key={stat.label} delay={MOTION.stagger * idx} inView inViewMargin={MOTION.viewport.margin}>
-                            <div className='flex h-full flex-col justify-between bg-white p-6 md:p-8'>
-                                <div className='font-display text-5xl text-neutral-900 md:text-7xl'>
+                            <div className='flex h-full flex-col justify-between gap-4 bg-white p-5 md:p-6'>
+                                <div className='font-display text-4xl text-neutral-900 md:text-5xl'>
                                     <NumberTicker value={stat.value} delay={0.2 + idx * 0.1} className='!text-neutral-900' />
                                     <span className='text-accent'>{stat.suffix}</span>
                                 </div>
-                                <p className='mt-4 font-mono text-[11px] tracking-widest text-neutral-500 uppercase'>
+                                <p className='font-mono text-[10px] tracking-widest text-neutral-500 uppercase'>
                                     {stat.label}
                                 </p>
                             </div>
@@ -54,7 +81,8 @@ export function AgencyResults() {
                     ))}
                 </div>
 
-                <div className='mt-10 flex flex-wrap items-center gap-2'>
+                {/* Industry chips */}
+                <div className='mt-6 flex flex-wrap items-center gap-2'>
                     {hospitality.map(({ icon: Icon, label }) => (
                         <span
                             key={label}

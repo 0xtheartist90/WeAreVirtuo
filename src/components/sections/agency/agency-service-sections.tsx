@@ -44,12 +44,12 @@ function ServiceTile({ s, i }: { s: ServiceDetailItem; i: number }) {
                 href={href}
                 onMouseEnter={onEnter}
                 onMouseLeave={onLeave}
-                className='group relative block aspect-[16/11] overflow-hidden border border-white/10'>
+                className='hover-lift group relative block aspect-[16/10] overflow-hidden border border-white/10 hover:border-accent/40'>
                 {img && (
                     <img
                         src={img}
                         alt={s.title}
-                        className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-105 ${
+                        className={`absolute inset-0 h-full w-full object-cover transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07] ${
                             isVideo && hover ? 'opacity-0' : 'opacity-100'
                         }`}
                     />
@@ -103,14 +103,8 @@ function ServiceTile({ s, i }: { s: ServiceDetailItem; i: number }) {
 
 export function AgencyServiceSections() {
     return (
-        <section className='py-14 md:py-20'>
+        <section className='pt-6 pb-14 md:pb-20'>
             <div className='grid-layout'>
-                <div className='col-span-full mb-6 flex items-end justify-between border-b border-white/15 pb-4 lg:col-start-2 lg:col-end-12'>
-                    <p className='text-accent font-mono text-[11px] tracking-widest uppercase'>[ Choose a Service ]</p>
-                    <span className='font-mono text-[11px] tracking-widest text-white/40 tabular-nums'>
-                        ({String(servicesDetail.length).padStart(2, '0')})
-                    </span>
-                </div>
                 <div className='col-span-full lg:col-start-2 lg:col-end-12'>
                     <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
                         {servicesDetail.map((s, i) => (

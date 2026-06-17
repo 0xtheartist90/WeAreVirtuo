@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import { AgencyButton } from '@/components/ui/agency-button';
+import { MatrixText } from '@/components/ui/matrix-text';
 import { QuoteFormPanel } from '@/components/ui/quote-form-panel';
 
 import { ArrowUpRight } from 'lucide-react';
@@ -22,11 +23,12 @@ export function AgencyContact() {
                         [ Contact ]
                     </p>
 
-                    <h2 className='relative col-span-full text-balance lg:col-span-8 lg:col-start-3'>
-                        <span className='font-display block text-4xl leading-[0.9] tracking-tight text-neutral-900 uppercase md:text-6xl lg:text-7xl'>
-                            Let&apos;s Make an Impact Together
-                        </span>
-                    </h2>
+                    <MatrixText
+                        as='h2'
+                        trigger='view'
+                        className='font-display relative col-span-full block text-4xl leading-[0.9] tracking-tight text-balance text-neutral-900 uppercase md:text-6xl lg:col-span-8 lg:col-start-3 lg:text-7xl'>
+                        Let&apos;s Make an Impact Together
+                    </MatrixText>
 
                     <div className='relative col-span-full lg:col-span-8 lg:col-start-3'>
                         <a

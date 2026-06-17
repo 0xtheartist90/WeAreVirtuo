@@ -1,25 +1,63 @@
-import { ArrowUpRight, Asterisk } from 'lucide-react';
+'use client';
 
-/* Light editorial statement — a white break in the black, BRUTAL-style. */
+import { MatrixText } from '@/components/ui/matrix-text';
+
+import { ArrowUpRight, Asterisk } from 'lucide-react';
+import { motion } from 'motion/react';
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/* Light editorial statement — high-end reveal: decoding label, clip-wipe lines,
+   a drawing accent rule. */
 export function AgencyStatement() {
     return (
-        <section className='bg-white text-neutral-900'>
+        <section className='relative overflow-hidden bg-white text-neutral-900'>
             <div className='grid-layout py-16 md:py-24'>
-                {/* Top rule */}
-                <div className='col-span-full mb-10 flex items-center justify-between border-b border-neutral-300 pb-4 font-mono text-[11px] tracking-widest text-neutral-500 uppercase lg:col-start-2 lg:col-end-12'>
-                    <span>[ The Virtuo Promise ]</span>
-                    <ArrowUpRight className='h-5 w-5 text-neutral-900' strokeWidth={1.75} />
+                {/* Top rule + decoding label */}
+                <div className='relative col-span-full mb-10 lg:col-start-2 lg:col-end-12'>
+                    <motion.span
+                        aria-hidden='true'
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true, margin: '-80px' }}
+                        transition={{ duration: 0.9, ease: EASE }}
+                        className='absolute -top-4 left-0 h-px w-full origin-left bg-neutral-300'
+                    />
+                    <div className='flex items-center justify-between'>
+                        <span className='font-mono text-[11px] tracking-widest text-neutral-500 uppercase'>
+                            [ <MatrixText as='span' trigger='view'>The Virtuo Promise</MatrixText> ]
+                        </span>
+                        <ArrowUpRight className='h-5 w-5 text-neutral-900' strokeWidth={1.75} />
+                    </div>
                 </div>
 
-                {/* Huge statement */}
+                {/* Statement — line-by-line clip wipe */}
                 <h2 className='col-span-full font-display text-5xl leading-[0.9] tracking-tight text-neutral-900 uppercase md:text-8xl lg:col-start-2 lg:col-end-12'>
-                    You Run Your Business.
-                    <br />
-                    <span className='text-accent'>Virtuo Runs</span> Your Marketing.
+                    <motion.span
+                        initial={{ clipPath: 'inset(0 100% 0 0)', opacity: 0.2 }}
+                        whileInView={{ clipPath: 'inset(0 0% 0 0)', opacity: 1 }}
+                        viewport={{ once: true, margin: '-80px' }}
+                        transition={{ duration: 0.7, ease: EASE }}
+                        className='block'>
+                        You Run Your Business.
+                    </motion.span>
+                    <motion.span
+                        initial={{ clipPath: 'inset(0 100% 0 0)', opacity: 0.2 }}
+                        whileInView={{ clipPath: 'inset(0 0% 0 0)', opacity: 1 }}
+                        viewport={{ once: true, margin: '-80px' }}
+                        transition={{ duration: 0.7, ease: EASE, delay: 0.18 }}
+                        className='block'>
+                        <span className='text-accent'>Virtuo Runs</span> Your Marketing.
+                    </motion.span>
                 </h2>
 
-                {/* Footnote row */}
-                <div className='col-span-full mt-10 flex flex-col gap-4 border-t border-neutral-200 pt-6 md:flex-row md:items-start md:justify-between lg:col-start-2 lg:col-end-12'>
+                {/* Footnote */}
+                <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.5, ease: EASE, delay: 0.4 }}
+                    className='col-span-full mt-10 flex flex-col gap-4 border-t border-neutral-200 pt-6 md:flex-row md:items-start md:justify-between lg:col-start-2 lg:col-end-12'>
                     <div className='flex items-start gap-3'>
                         <Asterisk className='text-accent h-5 w-5 shrink-0' />
                         <p className='max-w-xl text-sm leading-relaxed text-neutral-600'>
@@ -28,7 +66,7 @@ export function AgencyStatement() {
                         </p>
                     </div>
                     <span className='font-mono text-sm whitespace-nowrap text-neutral-500'>A&nbsp;to&nbsp;Z</span>
-                </div>
+                </motion.div>
             </div>
         </section>
     );
