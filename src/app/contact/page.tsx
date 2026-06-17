@@ -1,4 +1,4 @@
-import { AgencyContact } from '@/components/sections/agency/agency-contact';
+import { AgencyContactDetail } from '@/components/sections/agency/agency-contact-detail';
 import { AgencyFaq } from '@/components/sections/agency/agency-faq';
 import { AgencyFooter } from '@/components/sections/agency/agency-footer';
 import { PageHeader } from '@/components/ui/page-header';
@@ -20,9 +20,9 @@ export default function ContactPage() {
                 image='/images/bts/cinematographer-red.jpg'
             />
 
-            <AgencyContact />
+            <AgencyContactDetail />
 
-            <AgencyFaq />
+            <AgencyFaq light />
 
             <AgencyFooter />
         </>

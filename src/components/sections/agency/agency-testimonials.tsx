@@ -25,8 +25,13 @@ export function AgencyTestimonials() {
                 <div className='col-span-full lg:col-start-2 lg:col-end-12'>
                     <div className='grid grid-cols-1 divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0'>
                         {agencyTestimonials.map((t, idx) => (
-                            <BlurFade key={t.name} delay={MOTION.stagger * idx} inView inViewMargin={MOTION.viewport.margin}>
-                                <figure className='flex h-full flex-col py-8 md:px-8 md:py-2 md:first:pl-0 md:last:pr-0'>
+                            <BlurFade
+                                key={t.name}
+                                delay={MOTION.stagger * idx}
+                                inView
+                                inViewMargin={MOTION.viewport.margin}
+                                className='py-8 md:px-10 md:py-3 md:first:pl-0 md:last:pr-0'>
+                                <figure className='flex h-full flex-col'>
                                     <div className='flex items-start justify-between'>
                                         <span className='text-accent font-display -mt-2 text-6xl leading-none'>&ldquo;</span>
                                         <span className='text-accent/40 font-mono text-[11px] tracking-widest tabular-nums'>
