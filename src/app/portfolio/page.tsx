@@ -19,6 +19,7 @@ export default function PortfolioPage() {
                 title='Selected Work'
                 intro='A look at the brands we partner with. Hover to preview, tap any project to watch.'
                 meta={`${portfolio.length} Projects`}
+                image='/images/bts/full-production-set.jpg'
             />
 
             <AgencyFeaturedWork items={portfolio} />

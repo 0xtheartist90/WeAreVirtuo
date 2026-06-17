@@ -1,6 +1,6 @@
 import { AgencyContact } from '@/components/sections/agency/agency-contact';
+import { AgencyFaq } from '@/components/sections/agency/agency-faq';
 import { AgencyFooter } from '@/components/sections/agency/agency-footer';
-import { AgencyResults } from '@/components/sections/agency/agency-results';
 import { PageHeader } from '@/components/ui/page-header';
 
 export const metadata = {
@@ -17,11 +17,12 @@ export default function ContactPage() {
                 title="Let's Talk"
                 intro='Tell us where your business is missing visibility — we’ll show you how to capture it.'
                 meta='Toronto HQ'
+                image='/images/bts/cinematographer-red.jpg'
             />
 
             <AgencyContact />
 
-            <AgencyResults />
+            <AgencyFaq />
 
             <AgencyFooter />
         </>

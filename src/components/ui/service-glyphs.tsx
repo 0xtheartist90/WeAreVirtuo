@@ -16,14 +16,21 @@ const base = (props: GlyphProps) => ({
     ...props
 });
 
-/** Reach — radiating arcs from a node (visibility / digital marketing) */
-export function GlyphReach(props: GlyphProps) {
+/** Boho Sun — celestial sun with organic rays (visibility / digital marketing) */
+export function GlyphSun(props: GlyphProps) {
     return (
         <svg {...base(props)}>
-            <circle cx='9' cy='31' r='1.8' fill='currentColor' stroke='none' />
-            <path d='M9 23 A8 8 0 0 1 17 31' />
-            <path d='M9 15 A16 16 0 0 1 25 31' />
-            <path d='M9 7 A24 24 0 0 1 33 31' />
+            <circle cx='20' cy='20' r='6' />
+            {/* cardinal rays (longer) */}
+            <path d='M20 12 L20 7' />
+            <path d='M28 20 L33 20' />
+            <path d='M20 28 L20 33' />
+            <path d='M12 20 L7 20' />
+            {/* diagonal rays (shorter) */}
+            <path d='M25.66 14.34 L27.78 12.22' />
+            <path d='M25.66 25.66 L27.78 27.78' />
+            <path d='M14.34 25.66 L12.22 27.78' />
+            <path d='M14.34 14.34 L12.22 12.22' />
         </svg>
     );
 }
@@ -39,13 +46,14 @@ export function GlyphStructure(props: GlyphProps) {
     );
 }
 
-/** Orbit — sphere with a tilted ring + node (virtual tours / 360) */
-export function GlyphOrbit(props: GlyphProps) {
+/** Boho Arch — celestial portal with an inner sun + horizon (virtual tours / 360) */
+export function GlyphArch(props: GlyphProps) {
     return (
         <svg {...base(props)}>
-            <circle cx='20' cy='20' r='12' />
-            <ellipse cx='20' cy='20' rx='12' ry='4.4' transform='rotate(-24 20 20)' />
-            <circle cx='30.4' cy='14' r='1.8' fill='currentColor' stroke='none' />
+            <path d='M12 33 L12 19 A8 8 0 0 1 28 19 L28 33' />
+            <circle cx='20' cy='18' r='3' />
+            <path d='M13.5 24.5 L26.5 24.5' />
+            <circle cx='20' cy='8.5' r='1' fill='currentColor' stroke='none' />
         </svg>
     );
 }
@@ -61,4 +69,4 @@ export function GlyphPrism(props: GlyphProps) {
     );
 }
 
-export const serviceGlyphs = [GlyphReach, GlyphStructure, GlyphOrbit, GlyphPrism];
+export const serviceGlyphs = [GlyphSun, GlyphStructure, GlyphArch, GlyphPrism];

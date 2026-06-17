@@ -1,16 +1,12 @@
-import { AgencyApproach } from '@/components/sections/agency/agency-approach';
 import { AgencyContact } from '@/components/sections/agency/agency-contact';
 import { AgencyFooter } from '@/components/sections/agency/agency-footer';
-import { AgencyPillars } from '@/components/sections/agency/agency-pillars';
-import { V2FAQ } from '@/components/sections/v2-faq';
-import { CinematicSection } from '@/components/ui/cinematic-section';
+import { AgencyServiceSections } from '@/components/sections/agency/agency-service-sections';
 import { PageHeader } from '@/components/ui/page-header';
-import { agencyFaq } from '@/content/agency';
 
 export const metadata = {
-    title: 'Services — SEO, AI Search, Paid Ads & Web Development',
+    title: 'Services — SEO, AI Search, Paid Ads, Web & Video',
     description:
-        'Digital marketing, web development, and virtual tours. SEO, Local SEO, GEO/AI search visibility, Google & Meta Ads, and high-performance Next.js websites.'
+        'Choose a service: digital marketing (SEO, Local SEO, GEO/AI, Google & Meta Ads), high-performance web development, virtual tours, and video production.'
 };
 
 export default function ServicesPage() {
@@ -20,19 +16,12 @@ export default function ServicesPage() {
                 index='01'
                 label='Services'
                 title='What We Do'
-                intro='One team for the whole marketing ecosystem — visibility, advertising, websites, and production, handled end to end.'
+                intro='Four disciplines, one team. Pick a service to dive into exactly what’s included.'
                 meta='Canada & United States'
+                image='/images/bts/steadicam-operator.jpg'
             />
 
-            <AgencyApproach />
-
-            <CinematicSection bgImage='/images/bts/commercial-stage.jpg' overlayOpacity={86}>
-                <AgencyPillars />
-            </CinematicSection>
-
-            <CinematicSection bgImage='/images/bts/cooking-show-setup.jpg' overlayOpacity={88} diagonal>
-                <V2FAQ items={agencyFaq} />
-            </CinematicSection>
+            <AgencyServiceSections />
 
             <AgencyContact />
 

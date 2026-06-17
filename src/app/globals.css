@@ -240,6 +240,17 @@
     );
 }
 
+/* ── Diagonal hairlines (dark, for light/white sections) ── */
+.with-diagonal-lines-dark {
+    background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(0, 0, 0, 0.07) 0,
+        rgba(0, 0, 0, 0.07) 1px,
+        transparent 1px,
+        transparent 7px
+    );
+}
+
 /* ── Hairline-bordered tile ── */
 .tile-border {
     position: relative;
@@ -250,6 +261,142 @@
     inset: 0;
     pointer-events: none;
     border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ── Cyberpunk glitch / flicker hover (shared by nav links + buttons) ── */
+@keyframes glitch-flicker {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    15% {
+        transform: translateX(-1px);
+        opacity: 0.82;
+        text-shadow:
+            1px 0 rgba(220, 38, 38, 0.75),
+            -1px 0 rgba(56, 189, 248, 0.7);
+    }
+    30% {
+        transform: translateX(1px);
+        opacity: 1;
+        text-shadow:
+            -1px 0 rgba(220, 38, 38, 0.75),
+            1px 0 rgba(56, 189, 248, 0.7);
+    }
+    45% {
+        transform: translateX(-1px);
+        opacity: 0.9;
+        text-shadow: 1px 0 rgba(56, 189, 248, 0.6);
+    }
+    60% {
+        transform: translateX(1px);
+        opacity: 1;
+        text-shadow: -1px 0 rgba(220, 38, 38, 0.6);
+    }
+    75% {
+        transform: translateX(0);
+        opacity: 0.96;
+        text-shadow: none;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+        text-shadow: none;
+    }
+}
+@keyframes glitch-scanflash {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 0.25;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.glitch-hover {
+    position: relative;
+}
+.glitch-hover:hover,
+.glitch-hover:focus-visible {
+    animation: glitch-flicker 0.3s steps(3, end) 1;
+}
+.glitch-hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 3px);
+    opacity: 0;
+}
+.glitch-hover:hover::after,
+.glitch-hover:focus-visible::after {
+    animation: glitch-scanflash 0.3s steps(2, end) 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .glitch-hover:hover,
+    .glitch-hover:focus-visible,
+    .glitch-hover:hover::after,
+    .glitch-hover:focus-visible::after {
+        animation: none;
+    }
+}
+
+/* ── Hi-tech "select" hover (glitch family, for list rows) ── */
+.tech-select {
+    position: relative;
+}
+.tech-select::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(220, 38, 38, 0.12), rgba(220, 38, 38, 0.02) 35%, transparent 70%);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+        opacity 0.28s ease,
+        transform 0.28s ease;
+}
+.tech-select:hover::before,
+.tech-select:focus-within::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+.tech-select::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 3px);
+    opacity: 0;
+}
+.tech-select:hover::after,
+.tech-select:focus-within::after {
+    animation: glitch-scanflash 0.35s steps(2, end) 1;
+}
+.tech-select:hover .tech-title,
+.tech-select:focus-within .tech-title {
+    animation: glitch-flicker 0.3s steps(3, end) 1;
+}
+@media (prefers-reduced-motion: reduce) {
+    .tech-select::before {
+        transition: none;
+    }
+    .tech-select:hover .tech-title,
+    .tech-select:focus-within .tech-title,
+    .tech-select:hover::after,
+    .tech-select:focus-within::after {
+        animation: none;
+    }
 }
 
 @layer base {

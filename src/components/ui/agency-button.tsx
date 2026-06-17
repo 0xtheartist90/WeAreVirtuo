@@ -10,7 +10,7 @@ export function AgencyButton({ className, children, ...props }: ComponentPropsWi
     return (
         <button
             className={cn(
-                'bg-accent inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold tracking-wide text-white uppercase transition-colors hover:bg-accent/90 disabled:opacity-60',
+                'glitch-hover bg-accent inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold tracking-wide text-white uppercase transition-colors hover:bg-accent/90 disabled:opacity-60',
                 className
             )}
             {...props}>
@@ -21,4 +21,4 @@ export function AgencyButton({ className, children, ...props }: ComponentPropsWi
 
 /** Shared classes for sharp-cornered outline links/buttons. */
 export const outlineButtonClass =
-    'inline-flex items-center justify-center gap-2 border border-white/25 px-7 py-3.5 text-sm font-semibold tracking-wide text-white uppercase transition-colors hover:border-white/60 hover:bg-white/5';
+    'glitch-hover inline-flex items-center justify-center gap-2 border border-white/25 px-7 py-3.5 text-sm font-semibold tracking-wide text-white uppercase transition-colors hover:border-white/60 hover:bg-white/5';

@@ -7,9 +7,7 @@ import { AgencyResults } from '@/components/sections/agency/agency-results';
 import { AgencyServicesIndex } from '@/components/sections/agency/agency-services-index';
 import { AgencyStatement } from '@/components/sections/agency/agency-statement';
 import { AgencyTestimonials } from '@/components/sections/agency/agency-testimonials';
-import { AgencyVideo } from '@/components/sections/agency/agency-video';
 import { V2TrustBar } from '@/components/sections/v2-trust-bar';
-import { CinematicSection } from '@/components/ui/cinematic-section';
 import { agencyLogos } from '@/content/agency';
 import portfolio from '@/content/shared/portfolio';
 
@@ -35,10 +33,6 @@ export default function HomePage() {
             <AgencyFeaturedWork items={portfolio.slice(0, 4)} viewAllHref='/portfolio' />
 
             <AgencyResults />
-
-            <CinematicSection bgImage='/images/bts/silhouette-setup.png' overlayOpacity={85} diagonal diagonalBottom>
-                <AgencyVideo />
-            </CinematicSection>
 
             <AgencyTestimonials />
 

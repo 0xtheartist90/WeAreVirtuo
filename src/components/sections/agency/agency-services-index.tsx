@@ -35,20 +35,28 @@ export function AgencyServicesIndex() {
                         <Link
                             key={cap.title}
                             href='/services'
-                            className='group flex items-center justify-between gap-6 border-b border-white/10 py-6 md:py-8'>
-                            <div className='flex items-center gap-4 md:gap-8'>
-                                <Glyph className='text-foreground/40 group-hover:text-accent h-9 w-9 shrink-0 transition-colors md:h-12 md:w-12' />
-                                <span className='text-accent font-mono text-sm md:text-base'>/0{i + 1}</span>
+                            className='tech-select group relative flex items-center justify-between gap-6 overflow-hidden border-b border-white/10 px-2 py-7 md:px-3 md:py-10'>
+                            {/* targeting brackets */}
+                            <span className='border-accent pointer-events-none absolute top-1.5 left-0 z-[3] h-3 w-3 -translate-x-1 -translate-y-1 border-t border-l opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 md:h-4 md:w-4' />
+                            <span className='border-accent pointer-events-none absolute right-0 bottom-1.5 z-[3] h-3 w-3 translate-x-1 translate-y-1 border-r border-b opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 md:h-4 md:w-4' />
+
+                            <div className='relative z-[1] flex items-center gap-5 md:gap-10'>
+                                <Glyph className='text-foreground/30 group-hover:text-accent h-9 w-9 shrink-0 transition-colors md:h-14 md:w-14' />
                                 <div>
-                                    <span className='font-display text-foreground group-hover:text-accent block text-3xl tracking-wide uppercase transition-colors md:text-5xl'>
+                                    <span className='tech-title font-display text-foreground group-hover:text-accent block text-4xl leading-[0.88] tracking-tight uppercase transition-colors md:text-7xl lg:text-8xl'>
                                         {cap.title}
                                     </span>
-                                    <p className='mt-1 hidden max-w-md text-sm text-white/55 md:block'>
+                                    <p className='mt-2 hidden max-w-md text-sm text-white/45 md:block'>
                                         {cap.description}
                                     </p>
                                 </div>
                             </div>
-                            <ArrowUpRight className='text-foreground h-6 w-6 shrink-0 translate-x-2 opacity-40 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 md:h-8 md:w-8' />
+                            <div className='relative z-[1] flex shrink-0 flex-col items-end gap-2'>
+                                <span className='text-accent font-mono text-[10px] tracking-widest tabular-nums md:text-xs'>
+                                    ({String(i + 1).padStart(2, '0')})
+                                </span>
+                                <ArrowUpRight className='text-foreground h-7 w-7 translate-x-2 opacity-30 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 md:h-10 md:w-10' />
+                            </div>
                         </Link>
                         );
                     })}

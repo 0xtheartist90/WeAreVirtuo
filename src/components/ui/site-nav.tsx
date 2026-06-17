@@ -71,14 +71,14 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                                                 href={s.href}
                                                 target={s.external ? '_blank' : undefined}
                                                 rel={s.external ? 'noopener noreferrer' : undefined}
-                                                className='font-display text-foreground hover:text-accent block py-3 text-2xl tracking-wider uppercase'
+                                                className='glitch-hover font-display text-foreground hover:text-accent block py-3 text-2xl tracking-wider uppercase'
                                                 onClick={onClose}>
                                                 {s.label}
                                             </a>
                                         ) : (
                                             <Link
                                                 href={s.href}
-                                                className='font-display text-foreground hover:text-accent block py-3 text-2xl tracking-wider uppercase'
+                                                className='glitch-hover font-display text-foreground hover:text-accent block py-3 text-2xl tracking-wider uppercase'
                                                 onClick={onClose}>
                                                 {s.label}
                                             </Link>
@@ -91,7 +91,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                             <a
                                 href='/contact'
                                 onClick={onClose}
-                                className='bg-accent flex w-full items-center justify-center gap-2 px-6 py-4 text-lg font-semibold tracking-wide text-white uppercase'>
+                                className='glitch-hover bg-accent flex w-full items-center justify-center gap-2 px-6 py-4 text-lg font-semibold tracking-wide text-white uppercase'>
                                 Get a Quote
                                 <ArrowRight className='h-5 w-5' />
                             </a>
@@ -160,14 +160,14 @@ export function SiteNav() {
                                     href={s.href}
                                     target={s.external ? '_blank' : undefined}
                                     rel={s.external ? 'noopener noreferrer' : undefined}
-                                    className='hover:text-accent text-[0.8rem] font-semibold tracking-wide text-white/70 transition-colors'>
+                                    className='glitch-hover hover:text-accent text-[0.8rem] font-semibold tracking-wide text-white/70 transition-colors'>
                                     {inner}
                                 </a>
                             ) : (
                                 <Link
                                     key={s.href}
                                     href={s.href}
-                                    className={`hover:text-accent text-[0.8rem] font-semibold tracking-wide transition-colors ${
+                                    className={`glitch-hover hover:text-accent text-[0.8rem] font-semibold tracking-wide transition-colors ${
                                         pathname === s.href ? 'text-white' : 'text-white/70'
                                     }`}>
                                     {inner}
@@ -181,7 +181,7 @@ export function SiteNav() {
                         <button
                             type='button'
                             onClick={() => setQuoteOpen(true)}
-                            className='bg-accent hover:bg-accent/90 hidden px-4 py-2 text-[0.8rem] font-semibold tracking-wide text-white uppercase transition-colors md:inline-block'>
+                            className='glitch-hover bg-accent hover:bg-accent/90 hidden px-4 py-2 text-[0.8rem] font-semibold tracking-wide text-white uppercase transition-colors md:inline-block'>
                             Get a Quote
                         </button>
                         <button

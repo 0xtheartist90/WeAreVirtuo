@@ -33,13 +33,13 @@ const socialLinks = [
 
 export function AgencyFooter() {
     return (
-        <footer className='border-t border-neutral-200 bg-white py-14 text-neutral-900 md:py-16'>
+        <footer className='border-t border-white/[0.08] bg-background py-14 md:py-16'>
             <div className='mx-auto max-w-[var(--max-width-content)] px-4 md:px-8'>
                 <div className='grid grid-cols-1 gap-10 md:grid-cols-[1.5fr_1fr_1fr]'>
                     {/* Brand */}
                     <div>
-                        <HeaderLogo className='h-12 w-12' dark />
-                        <p className='mt-4 max-w-xs text-sm text-neutral-600'>
+                        <HeaderLogo className='h-12 w-12' />
+                        <p className='text-muted-foreground mt-4 max-w-xs text-sm'>
                             A Canadian digital marketing agency. SEO, AI search visibility, paid ads, and
                             high-performance web development for hospitality and multi-location brands.
                         </p>
@@ -51,7 +51,7 @@ export function AgencyFooter() {
                                     target='_blank'
                                     rel='noopener noreferrer'
                                     aria-label={label}
-                                    className='hover:text-accent flex h-9 w-9 items-center justify-center rounded-full border border-neutral-300 text-neutral-500 transition-colors hover:border-neutral-400'>
+                                    className='text-muted-foreground hover:text-accent flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] transition-colors hover:border-white/20'>
                                     <Icon className='h-4 w-4' />
                                 </a>
                             ))}
@@ -61,7 +61,7 @@ export function AgencyFooter() {
                     {/* Link columns */}
                     {columns.map((col) => (
                         <div key={col.heading}>
-                            <h4 className='mb-4 font-mono text-[11px] font-semibold tracking-widest text-neutral-900 uppercase'>
+                            <h4 className='text-foreground mb-4 font-mono text-[11px] font-semibold tracking-widest uppercase'>
                                 {col.heading}
                             </h4>
                             <ul className='space-y-2.5'>
@@ -69,7 +69,7 @@ export function AgencyFooter() {
                                     <li key={link.label}>
                                         <Link
                                             href={link.href}
-                                            className='text-sm text-neutral-500 transition-colors hover:text-neutral-900'>
+                                            className='text-muted-foreground hover:text-foreground text-sm transition-colors'>
                                             {link.label}
                                         </Link>
                                     </li>
@@ -79,14 +79,14 @@ export function AgencyFooter() {
                     ))}
                 </div>
 
-                <div className='mt-12 flex flex-col items-center justify-between gap-3 border-t border-neutral-200 pt-6 text-center md:flex-row md:text-left'>
-                    <p className='text-xs text-neutral-500'>
+                <div className='mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/[0.08] pt-6 text-center md:flex-row md:text-left'>
+                    <p className='text-muted-foreground text-xs'>
                         548 Dundas Street West, Unit B, Toronto ON M5T 1H3 ·{' '}
                         <a href='tel:6479530222' className='hover:text-accent transition-colors'>
                             (647) 953-0222
                         </a>
                     </p>
-                    <p className='text-xs text-neutral-500'>
+                    <p className='text-muted-foreground text-xs'>
                         &copy; {new Date().getFullYear()} Virtuo Agency. All rights reserved.
                     </p>
                 </div>

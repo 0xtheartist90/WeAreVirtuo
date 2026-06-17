@@ -1,50 +1,53 @@
 'use client';
 
 import { BlurFade } from '@/components/ui/blur-fade';
-import { CharacterReveal } from '@/components/ui/character-reveal';
-import { MagicCard } from '@/components/ui/magic-card';
 import { agencyTestimonials } from '@/content/agency';
 import { MOTION } from '@/lib/motion';
-
-import { Quote, Star } from 'lucide-react';
 
 export function AgencyTestimonials() {
     return (
         <section className='py-20 md:py-28'>
-            <div className='mx-auto max-w-[var(--max-width-content)] px-4 md:px-8'>
-                <div className='mx-auto mb-14 max-w-3xl text-center'>
-                    <p className='text-accent mb-3 text-sm font-medium tracking-widest uppercase'>Client Results</p>
-                    <CharacterReveal
-                        as='h2'
-                        className='font-display text-foreground text-4xl tracking-wide uppercase md:text-5xl'>
-                        What Partners Say
-                    </CharacterReveal>
+            <div className='grid-layout'>
+                {/* Header */}
+                <div className='col-span-full mb-10 flex items-end justify-between border-b border-white/15 pb-4 lg:col-start-2 lg:col-end-12'>
+                    <div>
+                        <p className='text-accent mb-2 font-mono text-[11px] tracking-widest uppercase'>[ Testimonials ]</p>
+                        <h2 className='font-display text-foreground text-4xl tracking-tight uppercase md:text-6xl'>
+                            In Their Words
+                        </h2>
+                    </div>
+                    <span className='font-mono text-[11px] tracking-widest text-white/40 tabular-nums'>
+                        ({String(agencyTestimonials.length).padStart(2, '0')})
+                    </span>
                 </div>
 
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-                    {agencyTestimonials.map((t, idx) => (
-                        <BlurFade key={t.name} delay={MOTION.stagger * idx} inView inViewMargin={MOTION.viewport.margin}>
-                            <MagicCard className='h-full rounded-xl'>
-                                <div className='flex h-full flex-col rounded-xl border border-white/[0.06] bg-white/[0.02] p-7'>
-                                    <Quote className='text-accent/40 h-8 w-8' />
-                                    <div className='my-4 flex gap-1'>
-                                        {[...Array(5)].map((_, i) => (
-                                            <Star key={i} className='fill-accent text-accent h-4 w-4' />
-                                        ))}
+                {/* Editorial columns */}
+                <div className='col-span-full lg:col-start-2 lg:col-end-12'>
+                    <div className='grid grid-cols-1 divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0'>
+                        {agencyTestimonials.map((t, idx) => (
+                            <BlurFade key={t.name} delay={MOTION.stagger * idx} inView inViewMargin={MOTION.viewport.margin}>
+                                <figure className='flex h-full flex-col py-8 md:px-8 md:py-2 md:first:pl-0 md:last:pr-0'>
+                                    <div className='flex items-start justify-between'>
+                                        <span className='text-accent font-display -mt-2 text-6xl leading-none'>&ldquo;</span>
+                                        <span className='text-accent/40 font-mono text-[11px] tracking-widest tabular-nums'>
+                                            /{String(idx + 1).padStart(2, '0')}
+                                        </span>
                                     </div>
-                                    <blockquote className='flex-1 text-base leading-relaxed text-white/85 italic'>
-                                        &ldquo;{t.quote}&rdquo;
+
+                                    <blockquote className='text-foreground/90 mt-2 flex-1 text-lg leading-relaxed'>
+                                        {t.quote}
                                     </blockquote>
-                                    <div className='mt-6 border-t border-white/[0.06] pt-4'>
-                                        <p className='text-foreground text-sm font-semibold'>{t.name}</p>
-                                        <p className='text-muted-foreground text-xs'>
-                                            {t.title}, <span className='text-accent'>{t.company}</span>
+
+                                    <figcaption className='mt-8 border-t border-white/10 pt-5'>
+                                        <p className='font-display text-foreground text-xl tracking-wide uppercase'>{t.name}</p>
+                                        <p className='mt-1 font-mono text-[11px] tracking-widest text-white/45 uppercase'>
+                                            {t.title} · <span className='text-accent'>{t.company}</span>
                                         </p>
-                                    </div>
-                                </div>
-                            </MagicCard>
-                        </BlurFade>
-                    ))}
+                                    </figcaption>
+                                </figure>
+                            </BlurFade>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

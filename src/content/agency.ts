@@ -136,6 +136,88 @@ export const agencyCapabilities: Capability[] = [
     }
 ];
 
+/* ─────────────── Services page — deep per-service detail ─────────────── */
+
+export type ServiceDetailItem = {
+    key: string;
+    title: string;
+    tagline: string;
+    description: string;
+    href: string;
+    capabilities: { title: string; detail: string }[];
+    stat?: { value: string; label: string };
+    kind?: 'reels';
+    image?: string;
+};
+
+export const servicesDetail: ServiceDetailItem[] = [
+    {
+        key: 'digital-marketing',
+        title: 'Digital Marketing',
+        tagline: 'Be discovered everywhere your customers search.',
+        description:
+            'We run the entire search ecosystem — organic, local, AI, and paid — as one connected engine. From account setup to ongoing optimization, tracking to reporting, it’s all handled in house.',
+        href: '/digital-marketing',
+        capabilities: [
+            { title: 'SEO & Local SEO', detail: 'Technical + on-page optimization, Google Business Profile, and local-pack visibility for every location.' },
+            { title: 'GEO & AI Search', detail: 'Content and entities structured to surface in Google AI Overviews and ChatGPT-style answers.' },
+            { title: 'Google Ads', detail: 'Intent-based search campaigns — built, managed, and continuously optimized against ROAS.' },
+            { title: 'Meta Ads', detail: 'Instagram & Facebook demand generation, creative testing, and retargeting funnels.' },
+            { title: 'Analytics & CRO', detail: 'Conversion tracking, attribution, and landing-page optimization measured against real revenue.' }
+        ],
+        stat: { value: '24/7', label: 'Visibility across the search ecosystem' },
+        image: '/images/bts/commercial-stage.jpg'
+    },
+    {
+        key: 'web-development',
+        title: 'Web Development',
+        tagline: 'The infrastructure your campaigns deserve.',
+        description:
+            'High-performance websites engineered on Next.js and Vercel — fast, SEO-ready, mobile-first, and built to convert. Marketing performs far better on infrastructure designed for it.',
+        href: '/web-development',
+        capabilities: [
+            { title: 'Next.js + Vercel', detail: 'Modern React architecture deployed on a global edge network.' },
+            { title: 'Technical SEO', detail: 'Clean semantic markup, structured data, and crawlability from day one.' },
+            { title: 'Landing Page Systems', detail: 'Reusable, conversion-focused page systems for running campaigns at scale.' },
+            { title: 'Core Web Vitals', detail: 'Top performance scores on every device — speed is a ranking factor.' },
+            { title: 'Mobile-First', detail: 'Designed for how customers actually browse and buy.' }
+        ],
+        stat: { value: '90+', label: 'Core Web Vitals performance target' },
+        image: '/images/bts/full-production-set.jpg'
+    },
+    {
+        key: 'virtual-tours',
+        title: 'Virtual Tours & 360°',
+        tagline: 'Put customers inside your space before they arrive.',
+        description:
+            'Custom 360° experiences and Google Virtual Tours for hospitality, automotive, and retail — over 10,000 immersive tours produced across North America.',
+        href: '/virtual-tours',
+        capabilities: [
+            { title: 'Google Virtual Tours', detail: 'Street View-trusted production that boosts local visibility and Maps engagement.' },
+            { title: 'Custom 360° Experiences', detail: 'Branded, interactive environments tailored to your space.' },
+            { title: 'Enterprise Activations', detail: 'Large-scale commercial and multi-location rollouts.' },
+            { title: 'Automotive & Retail', detail: 'Showroom, venue, and event-scale immersive capture.' }
+        ],
+        stat: { value: '10,000+', label: 'Virtual tours produced' },
+        image: '/images/bts/cinematographer-red.jpg'
+    },
+    {
+        key: 'video',
+        title: 'Video & Content',
+        tagline: 'Cinematic content that feeds every channel.',
+        description:
+            'Production, reels, and hospitality content produced in house — the visual fuel for everything we manage. Tap any reel to watch.',
+        href: '/portfolio',
+        kind: 'reels',
+        capabilities: [
+            { title: 'Social Reels', detail: 'Scroll-stopping vertical content for Instagram, TikTok, and Shorts.' },
+            { title: 'Commercial', detail: 'Cinematic brand films and product storytelling.' },
+            { title: 'Hospitality', detail: 'Restaurant, hotel, and venue content built to convert.' },
+            { title: 'Photography', detail: 'High-end stills to round out every campaign.' }
+        ]
+    }
+];
+
 /* ─────────────── "Beyond SEO" — positioning steps ─────────────── */
 
 export const visibilityChannels = [

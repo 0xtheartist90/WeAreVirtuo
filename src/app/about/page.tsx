@@ -36,6 +36,7 @@ export default function AboutPage() {
                 title='We Are Virtuo'
                 intro='A Canadian digital marketing agency built for how customers actually search today.'
                 meta='Toronto · CA / US'
+                image='/images/bts/cooking-show-setup.jpg'
             />
 
             {/* Statement */}
@@ -50,6 +51,8 @@ export default function AboutPage() {
                     </h2>
                 </div>
             </section>
+
+            <AgencyResults />
 
             {/* How we work — numbered */}
             <section className='border-y border-white/10 py-20 md:py-24'>
@@ -72,8 +75,6 @@ export default function AboutPage() {
                     </div>
                 </div>
             </section>
-
-            <AgencyResults />
 
             <AgencyContact />
 
