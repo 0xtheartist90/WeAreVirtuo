@@ -9,7 +9,12 @@ const Spline = lazy(() => import('@splinetool/react-spline'));
 
 const SCENE_URL = '/scene.splinecode';
 
-export function SplineHero() {
+interface SplineHeroProps {
+    /** Render as an absolute-fill background layer (for overlaying content on top). */
+    asBackground?: boolean;
+}
+
+export function SplineHero({ asBackground = false }: SplineHeroProps) {
     const wrapRef = useRef<HTMLDivElement>(null);
 
     // Let wheel/scroll pass through to the page while keeping pointer-drag on the
@@ -28,22 +33,31 @@ export function SplineHero() {
         return () => window.removeEventListener('wheel', onWheel, { capture: true });
     }, []);
 
+    // Shared interactive scene layer — drag works; touch-action pan-y lets vertical
+    // swipes scroll the page while horizontal gestures still rotate.
+    const scene = (
+        <div ref={wrapRef} className='absolute inset-0' style={{ touchAction: 'pan-y' }}>
+            <Suspense
+                fallback={
+                    <div className='absolute inset-0 grid place-items-center'>
+                        <span className='animate-pulse font-mono text-[11px] tracking-widest text-white/40 uppercase'>
+                            Loading experience…
+                        </span>
+                    </div>
+                }>
+                <Spline scene={SCENE_URL} className='!h-full !w-full' />
+            </Suspense>
+        </div>
+    );
+
+    // Background mode: fill the parent so content can be overlaid on top of the scene.
+    if (asBackground) {
+        return <div className='absolute inset-0'>{scene}</div>;
+    }
+
     return (
         <section className='bg-background relative h-[100svh] w-full overflow-hidden'>
-            {/* Interactive scene — drag works; touch-action pan-y lets vertical
-                swipes scroll the page while horizontal gestures still rotate. */}
-            <div ref={wrapRef} className='absolute inset-0' style={{ touchAction: 'pan-y' }}>
-                <Suspense
-                    fallback={
-                        <div className='absolute inset-0 grid place-items-center'>
-                            <span className='animate-pulse font-mono text-[11px] tracking-widest text-white/40 uppercase'>
-                                Loading experience…
-                            </span>
-                        </div>
-                    }>
-                    <Spline scene={SCENE_URL} className='!h-full !w-full' />
-                </Suspense>
-            </div>
+            {scene}
 
             {/* subtle brand label, top-left (clears the fixed nav) */}
             <div className='pointer-events-none absolute top-24 left-0 z-10 hidden md:block'>

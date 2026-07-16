@@ -89,6 +89,7 @@ export function AgencyHero() {
                             muted
                             loop
                             playsInline
+                            preload='auto'
                             className='aspect-[2/1] w-full object-cover md:aspect-[21/9]'
                         />
                     ) : (

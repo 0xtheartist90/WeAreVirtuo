@@ -1,6 +1,6 @@
 import { AgencyApproach } from '@/components/sections/agency/agency-approach';
+import { AgencyCaseStudies } from '@/components/sections/agency/agency-case-studies';
 import { AgencyContact } from '@/components/sections/agency/agency-contact';
-import { AgencyFeaturedWork } from '@/components/sections/agency/agency-featured-work';
 import { AgencyFooter } from '@/components/sections/agency/agency-footer';
 import { AgencyHero } from '@/components/sections/agency/agency-hero';
 import { AgencyResults } from '@/components/sections/agency/agency-results';
@@ -22,8 +22,6 @@ export const metadata = {
 export default function HomePage() {
     return (
         <>
-            <SplineHero />
-
             <AgencyHero />
 
             <V2TrustBar logos={agencyLogos} />
@@ -36,9 +34,11 @@ export default function HomePage() {
 
             <AgencyStatement />
 
-            <AgencyFeaturedWork items={portfolio.slice(0, 4)} viewAllHref='/portfolio' />
+            <AgencyCaseStudies items={portfolio.slice(0, 6)} viewAllHref='/portfolio' />
 
             <AgencyResults />
+
+            <SplineHero />
 
             <AgencyTestimonials />
 

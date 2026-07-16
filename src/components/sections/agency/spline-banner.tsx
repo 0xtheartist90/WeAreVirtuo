@@ -2,6 +2,8 @@
 
 import { Suspense, lazy, useEffect, useRef } from 'react';
 
+import { MatrixText } from '@/components/ui/matrix-text';
+
 const Spline = lazy(() => import('@splinetool/react-spline'));
 
 interface SplineBannerProps {
@@ -44,6 +46,15 @@ export function SplineBanner({ scene = '/banner.splinecode', heightClassName = '
                     }>
                     <Spline scene={scene} className='!h-full !w-full' />
                 </Suspense>
+            </div>
+
+            {/* Big overlay title — pointer-events-none so drag still reaches the scene */}
+            <div className='pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4'>
+                <h2 className='font-display text-center text-6xl leading-[0.85] tracking-tight text-white uppercase drop-shadow-[0_2px_24px_rgba(0,0,0,0.7)] md:text-8xl lg:text-[10rem]'>
+                    <MatrixText as='span' trigger='view' className='block'>
+                        Get Chosen.
+                    </MatrixText>
+                </h2>
             </div>
         </section>
     );

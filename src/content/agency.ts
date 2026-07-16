@@ -26,7 +26,7 @@ export const agencyHero = {
     headline: 'Get Found Everywhere',
     subheadline: 'SEO, AI search visibility & paid ads that turn attention into customers.',
     // Reuses an existing hero video on the Vercel Blob CDN.
-    videoSrc: 'videos/portfolio/nome-fort-york.mp4',
+    videoSrc: '/hero-loop.mp4',
     posterSrc: '/images/hero/slider-2.jpg'
 };
 
@@ -265,19 +265,25 @@ export const agencyTestimonials = [
         quote: 'Virtuo took us beyond rankings — we now show up on Maps, in AI answers, and across paid search. Bookings followed.',
         name: 'Patrick Lee',
         title: 'Owner',
-        company: 'Nome Izakaya'
+        company: 'Nome Izakaya',
+        image: '/images/testimonials/patrick.jpg',
+        tag: 'Maps · AI · Paid'
     },
     {
         quote: 'They handle our entire marketing ecosystem across multiple locations. We focus on the guests; Virtuo handles visibility.',
         name: 'Crystal Sheriff',
         title: 'Marketing Director',
-        company: 'Gray Line Toronto'
+        company: 'Gray Line Toronto',
+        image: '/images/testimonials/jessica.jpg',
+        tag: 'Multi-location'
     },
     {
         quote: 'The new site is fast, ranks, and converts. Exactly the kind of infrastructure a serious hospitality brand needs.',
         name: 'Operations Lead',
         title: 'Hospitality Group',
-        company: 'The Hazelton Hotel'
+        company: 'The Hazelton Hotel',
+        image: '/images/testimonials/michael.jpg',
+        tag: 'Web · SEO'
     }
 ];
 

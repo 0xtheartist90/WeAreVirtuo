@@ -68,14 +68,21 @@ export function AgencyResults() {
                 <div className='mt-10 grid grid-cols-2 gap-px border border-neutral-200 bg-neutral-200 md:grid-cols-4'>
                     {agencyStats.map((stat, idx) => (
                         <BlurFade key={stat.label} delay={MOTION.stagger * idx} inView inViewMargin={MOTION.viewport.margin}>
-                            <div className='flex h-full flex-col justify-between gap-4 bg-white p-5 md:p-6'>
-                                <div className='font-display text-4xl text-neutral-900 md:text-5xl'>
-                                    <NumberTicker value={stat.value} delay={0.2 + idx * 0.1} className='!text-neutral-900' />
-                                    <span className='text-accent'>{stat.suffix}</span>
+                            <div className='group relative flex h-full flex-col justify-between gap-6 overflow-hidden bg-white p-5 transition-colors duration-300 hover:bg-neutral-50 md:p-6'>
+                                {/* accent top bar grows on hover */}
+                                <span className='bg-accent absolute top-0 left-0 h-0.5 w-0 transition-[width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full' />
+                                <span className='font-mono text-[10px] tracking-widest text-neutral-300 tabular-nums transition-colors duration-300 group-hover:text-accent'>
+                                    /{String(idx + 1).padStart(2, '0')}
+                                </span>
+                                <div>
+                                    <div className='font-display text-5xl leading-none text-neutral-900 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 md:text-6xl'>
+                                        <NumberTicker value={stat.value} delay={0.2 + idx * 0.1} className='!text-neutral-900' />
+                                        <span className='text-accent'>{stat.suffix}</span>
+                                    </div>
+                                    <p className='mt-3 font-mono text-[10px] tracking-widest text-neutral-500 uppercase'>
+                                        {stat.label}
+                                    </p>
                                 </div>
-                                <p className='font-mono text-[10px] tracking-widest text-neutral-500 uppercase'>
-                                    {stat.label}
-                                </p>
                             </div>
                         </BlurFade>
                     ))}
@@ -83,11 +90,14 @@ export function AgencyResults() {
 
                 {/* Industry chips */}
                 <div className='mt-6 flex flex-wrap items-center gap-2'>
+                    <span className='mr-1 font-mono text-[10px] tracking-widest text-neutral-400 uppercase'>
+                        Built for
+                    </span>
                     {hospitality.map(({ icon: Icon, label }) => (
                         <span
                             key={label}
-                            className='flex items-center gap-2 border border-neutral-300 px-3 py-1.5 text-sm text-neutral-700'>
-                            <Icon className='text-accent h-4 w-4' />
+                            className='hover:border-accent group flex items-center gap-2 border border-neutral-300 px-3 py-1.5 text-sm text-neutral-700 transition-colors duration-300 hover:text-neutral-900'>
+                            <Icon className='text-accent h-4 w-4 transition-transform duration-300 group-hover:scale-110' />
                             {label}
                         </span>
                     ))}
