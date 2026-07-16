@@ -49,7 +49,7 @@ export function V2TrustBar({ logos }: V2TrustBarProps) {
             <p className='mb-5 text-center text-[11px] font-semibold tracking-[0.2em] text-white/60 uppercase'>
                 {brandAnimatedR("Trusted by Toronto's Best")}
             </p>
-            <Marquee pauseOnHover className='[--duration:55s]'>
+            <Marquee className='[--duration:100s]'>
                 {displayLogos.map((logo, idx) => (
                     <LogoItem key={`${logo.name}-${idx}`} logo={logo} />
                 ))}

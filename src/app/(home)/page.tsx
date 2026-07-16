@@ -7,6 +7,7 @@ import { AgencyResults } from '@/components/sections/agency/agency-results';
 import { AgencyServicesIndex } from '@/components/sections/agency/agency-services-index';
 import { AgencyStatement } from '@/components/sections/agency/agency-statement';
 import { AgencyTestimonials } from '@/components/sections/agency/agency-testimonials';
+import { SplineBanner } from '@/components/sections/agency/spline-banner';
 import { SplineHero } from '@/components/sections/agency/spline-hero';
 import { V2TrustBar } from '@/components/sections/v2-trust-bar';
 import { agencyLogos } from '@/content/agency';
@@ -28,6 +29,8 @@ export default function HomePage() {
             <V2TrustBar logos={agencyLogos} />
 
             <AgencyServicesIndex />
+
+            <SplineBanner />
 
             <AgencyApproach />
 
