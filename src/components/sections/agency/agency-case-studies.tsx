@@ -13,8 +13,10 @@ import { createPortal } from 'react-dom';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-// Varying aspect ratios create the staggered masonry rhythm.
-const ASPECT = ['aspect-[4/5]', 'aspect-[2/3]', 'aspect-[4/5]', 'aspect-[3/4]', 'aspect-[2/3]', 'aspect-[4/5]'];
+// Two card heights: cards 1,4,5 use the taller ratio; cards 2,3,6 the shorter one.
+const TALL = 'aspect-[2/3]';
+const SHORT = 'aspect-[4/5]';
+const ASPECT = [TALL, SHORT, SHORT, TALL, TALL, SHORT];
 
 /* ─────────── Inline player (no external redirect) ─────────── */
 
@@ -136,10 +138,10 @@ function CaseCard({ item, index, onOpen }: { item: PortfolioItem; index: number;
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6, ease: EASE, delay: (index % 3) * 0.08 }}
+            initial={{ opacity: 0, y: 60, scale: 0.95, filter: 'blur(6px)' }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            viewport={{ once: true, margin: '0px 0px -12% 0px' }}
+            transition={{ duration: 0.8, ease: EASE, delay: (index % 3) * 0.1 }}
             className='mb-4 break-inside-avoid md:mb-5'>
             <button
                 type='button'

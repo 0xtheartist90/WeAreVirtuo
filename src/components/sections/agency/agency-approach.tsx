@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Link from 'next/link';
 
@@ -8,7 +8,7 @@ import { MatrixText } from '@/components/ui/matrix-text';
 import { visibilityChannels } from '@/content/agency';
 
 import { ArrowUpRight, Bot, MapPin, MessageSquare, Plus, Search, Sparkles, Target } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -20,13 +20,56 @@ const channelIcons = [Search, MapPin, Sparkles, Bot, Target, MessageSquare];
    headline, centered B&W portrait, left copy block, and an oversized stat. */
 export function AgencyApproach() {
     const [active, setActive] = useState<number | null>(0);
+    const reduced = useReducedMotion();
+    const sectionRef = useRef<HTMLElement>(null);
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    // Direct scroll-driven parallax: the portrait pans within its frame as the
+    // section moves through the viewport. Uses a plain scroll listener so it runs
+    // wherever scroll events fire.
+    useEffect(() => {
+        if (reduced) return;
+        const onScroll = () => {
+            const sec = sectionRef.current;
+            if (!sec) return;
+            const rect = sec.getBoundingClientRect();
+            const vh = window.innerHeight || 1;
+            // 0 as the section enters from the bottom, 1 as it leaves past the top
+            const progress = (vh - rect.top) / (vh + rect.height);
+            const c = Math.max(0, Math.min(1, progress));
+            if (imgRef.current) imgRef.current.style.transform = `translate3d(0, ${(c - 0.5) * 18}%, 0)`;
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', onScroll);
+        };
+    }, [reduced]);
 
     return (
-        <section id='approach' className='bg-accent relative overflow-hidden text-white'>
+        <section
+            ref={sectionRef}
+            id='approach'
+            className='bg-accent relative z-20 -mt-[7vh] overflow-hidden text-white shadow-[0_-40px_80px_-24px_rgba(0,0,0,0.65)]'>
+            {/* Curtain: dark panel carries over from the section above, then peels
+                up to reveal the red — a premium layered transition into the section. */}
+            <motion.div
+                aria-hidden='true'
+                className='bg-background pointer-events-none absolute inset-0 z-40'
+                initial={{ y: 0 }}
+                whileInView={{ y: '-100%' }}
+                viewport={{ once: true, margin: '0px 0px -20% 0px' }}
+                transition={{ duration: 0.95, ease: EASE }}>
+                <span className='absolute inset-x-0 bottom-0 h-[3px] bg-white' />
+            </motion.div>
+
             {/* faint dot texture keeps it in our styling */}
             <div className='dot-grid pointer-events-none absolute inset-0 opacity-[0.12]' />
 
-            <div className='relative mx-auto flex min-h-[92vh] max-w-[1600px] flex-col px-5 py-8 md:px-10 md:py-10'>
+            <div className='relative z-10 mx-auto flex min-h-[92vh] max-w-[1600px] flex-col px-5 py-8 md:px-10 md:py-10'>
                 {/* ── Top micro row ── */}
                 <div className='flex items-start justify-between gap-4 border-b border-white/20 pb-4 font-mono text-[11px] tracking-widest text-white/70 uppercase'>
                     <span>
@@ -63,18 +106,19 @@ export function AgencyApproach() {
                         <span className='font-semibold text-white'>and turn that visibility into booked customers</span>.
                     </motion.p>
 
-                    {/* Centered B&W portrait */}
+                    {/* Centered B&W portrait — image parallax pans within the frame */}
                     <motion.div
                         initial={{ clipPath: 'inset(100% 0 0 0)', opacity: 0.3 }}
                         whileInView={{ clipPath: 'inset(0% 0 0 0)', opacity: 1 }}
                         viewport={{ once: true, margin: '-80px' }}
                         transition={{ duration: 0.9, ease: EASE }}
-                        className='media-zoom group order-1 overflow-hidden md:order-2 md:col-span-4 md:col-start-5'>
+                        className='group relative order-1 aspect-[3/4] overflow-hidden md:order-2 md:col-span-4 md:col-start-5'>
                         <img
+                            ref={imgRef}
                             src='/images/bts/commercial-stage.jpg'
                             alt=''
                             aria-hidden='true'
-                            className='aspect-[3/4] w-full object-cover grayscale transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105'
+                            className='absolute inset-x-0 -top-[20%] h-[140%] w-full object-cover grayscale will-change-transform'
                         />
                     </motion.div>
 

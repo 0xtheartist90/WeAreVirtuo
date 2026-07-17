@@ -9,6 +9,9 @@ import { MOTION } from '@/lib/motion';
 import { videoUrl } from '@/lib/video';
 
 import { Building2, Hotel, MapPinned, UtensilsCrossed } from 'lucide-react';
+import { motion } from 'motion/react';
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 const hospitality = [
     { icon: Hotel, label: 'Luxury Hotels' },
@@ -45,7 +48,12 @@ export function AgencyResults() {
                             Hundreds of hospitality and multi-location businesses getting found and growing.
                         </p>
                     </div>
-                    <div className='relative w-full shrink-0 overflow-hidden border border-neutral-200 md:w-72'>
+                    <motion.div
+                        initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
+                        whileInView={{ opacity: 1, clipPath: 'inset(0 0% 0 0)' }}
+                        viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+                        transition={{ duration: 0.85, ease: EASE, delay: 0.15 }}
+                        className='relative w-full shrink-0 overflow-hidden border border-neutral-200 md:w-72'>
                         {!reducedMotion ? (
                             <video
                                 src={videoUrl(RESULTS_VIDEO)}
@@ -61,7 +69,7 @@ export function AgencyResults() {
                         )}
                         <span className='border-accent absolute top-2.5 left-2.5 h-4 w-4 border-t border-l' />
                         <span className='border-accent absolute right-2.5 bottom-2.5 h-4 w-4 border-r border-b' />
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* Stat row */}
@@ -93,13 +101,17 @@ export function AgencyResults() {
                     <span className='mr-1 font-mono text-[10px] tracking-widest text-neutral-400 uppercase'>
                         Built for
                     </span>
-                    {hospitality.map(({ icon: Icon, label }) => (
-                        <span
+                    {hospitality.map(({ icon: Icon, label }, idx) => (
+                        <motion.span
                             key={label}
+                            initial={{ opacity: 0, y: 12 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+                            transition={{ duration: 0.4, ease: EASE, delay: idx * 0.08 }}
                             className='hover:border-accent group flex items-center gap-2 border border-neutral-300 px-3 py-1.5 text-sm text-neutral-700 transition-colors duration-300 hover:text-neutral-900'>
                             <Icon className='text-accent h-4 w-4 transition-transform duration-300 group-hover:scale-110' />
                             {label}
-                        </span>
+                        </motion.span>
                     ))}
                 </div>
             </div>

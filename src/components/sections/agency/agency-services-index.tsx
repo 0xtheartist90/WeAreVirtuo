@@ -1,3 +1,7 @@
+'use client';
+
+import { useRef } from 'react';
+
 import Link from 'next/link';
 
 import { MatrixText } from '@/components/ui/matrix-text';
@@ -5,6 +9,70 @@ import { serviceGlyphs } from '@/components/ui/service-glyphs';
 import { agencyCapabilities } from '@/content/agency';
 
 import { ArrowUpRight } from 'lucide-react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/* ─── One service row — slides in from the right on scroll, with a subtle
+   scroll-linked parallax drift so the scroll keeps "doing something". ─── */
+function ServiceRow({ index }: { index: number }) {
+    const cap = agencyCapabilities[index];
+    const Glyph = serviceGlyphs[index % serviceGlyphs.length];
+    const rowRef = useRef<HTMLAnchorElement>(null);
+    const reduced = useReducedMotion();
+
+    // Scroll progress across this row → subtle drift of the big index number.
+    const { scrollYProgress } = useScroll({
+        target: rowRef,
+        offset: ['start end', 'end start']
+    });
+    const numberX = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [40, -40]);
+
+    return (
+        <motion.div
+            initial={reduced ? { opacity: 0 } : { opacity: 0, x: 120, filter: 'blur(8px)' }}
+            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true, margin: '0px 0px -20% 0px' }}
+            transition={{ duration: 0.85, ease: EASE, delay: 0.05 }}>
+            <Link
+                ref={rowRef}
+                href='/services'
+                className='tech-select group relative flex items-center justify-between gap-6 overflow-hidden border-b border-white/10 px-2 py-7 md:px-3 md:py-10'>
+                {/* accent underline that wipes in from the left as the row settles */}
+                <motion.span
+                    aria-hidden='true'
+                    className='bg-accent absolute bottom-0 left-0 z-[2] h-px w-full origin-left'
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true, margin: '0px 0px -20% 0px' }}
+                    transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
+                />
+
+                {/* targeting brackets */}
+                <span className='border-accent pointer-events-none absolute top-1.5 left-0 z-[3] h-3 w-3 -translate-x-1 -translate-y-1 border-t border-l opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 md:h-4 md:w-4' />
+                <span className='border-accent pointer-events-none absolute right-0 bottom-1.5 z-[3] h-3 w-3 translate-x-1 translate-y-1 border-r border-b opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 md:h-4 md:w-4' />
+
+                <div className='relative z-[1] flex items-center gap-5 md:gap-10'>
+                    <Glyph className='text-foreground/30 group-hover:text-accent h-9 w-9 shrink-0 transition-colors md:h-14 md:w-14' />
+                    <div>
+                        <span className='tech-title font-display text-foreground group-hover:text-accent block text-4xl leading-[0.88] tracking-tight uppercase transition-colors md:text-7xl lg:text-8xl'>
+                            {cap.title}
+                        </span>
+                        <p className='mt-2 hidden max-w-md text-sm text-white/45 md:block'>{cap.description}</p>
+                    </div>
+                </div>
+                <div className='relative z-[1] flex shrink-0 flex-col items-end gap-2'>
+                    <motion.span
+                        style={{ x: numberX }}
+                        className='text-accent font-mono text-[10px] tracking-widest tabular-nums md:text-xs'>
+                        ({String(index + 1).padStart(2, '0')})
+                    </motion.span>
+                    <ArrowUpRight className='text-foreground h-7 w-7 translate-x-2 opacity-30 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 md:h-10 md:w-10' />
+                </div>
+            </Link>
+        </motion.div>
+    );
+}
 
 /* Bold services index on the homepage → links to the Services page. */
 export function AgencyServicesIndex() {
@@ -32,38 +100,9 @@ export function AgencyServicesIndex() {
 
                 {/* Index list */}
                 <div className='col-span-full lg:col-start-2 lg:col-end-12'>
-                    {agencyCapabilities.map((cap, i) => {
-                        const Glyph = serviceGlyphs[i % serviceGlyphs.length];
-
-                        return (
-                        <Link
-                            key={cap.title}
-                            href='/services'
-                            className='tech-select group relative flex items-center justify-between gap-6 overflow-hidden border-b border-white/10 px-2 py-7 md:px-3 md:py-10'>
-                            {/* targeting brackets */}
-                            <span className='border-accent pointer-events-none absolute top-1.5 left-0 z-[3] h-3 w-3 -translate-x-1 -translate-y-1 border-t border-l opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 md:h-4 md:w-4' />
-                            <span className='border-accent pointer-events-none absolute right-0 bottom-1.5 z-[3] h-3 w-3 translate-x-1 translate-y-1 border-r border-b opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 md:h-4 md:w-4' />
-
-                            <div className='relative z-[1] flex items-center gap-5 md:gap-10'>
-                                <Glyph className='text-foreground/30 group-hover:text-accent h-9 w-9 shrink-0 transition-colors md:h-14 md:w-14' />
-                                <div>
-                                    <span className='tech-title font-display text-foreground group-hover:text-accent block text-4xl leading-[0.88] tracking-tight uppercase transition-colors md:text-7xl lg:text-8xl'>
-                                        {cap.title}
-                                    </span>
-                                    <p className='mt-2 hidden max-w-md text-sm text-white/45 md:block'>
-                                        {cap.description}
-                                    </p>
-                                </div>
-                            </div>
-                            <div className='relative z-[1] flex shrink-0 flex-col items-end gap-2'>
-                                <span className='text-accent font-mono text-[10px] tracking-widest tabular-nums md:text-xs'>
-                                    ({String(i + 1).padStart(2, '0')})
-                                </span>
-                                <ArrowUpRight className='text-foreground h-7 w-7 translate-x-2 opacity-30 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 md:h-10 md:w-10' />
-                            </div>
-                        </Link>
-                        );
-                    })}
+                    {agencyCapabilities.map((cap, i) => (
+                        <ServiceRow key={cap.title} index={i} />
+                    ))}
                 </div>
 
                 {/* Mobile CTA */}

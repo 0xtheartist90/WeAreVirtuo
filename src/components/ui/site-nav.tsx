@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -108,36 +108,14 @@ export function SiteNav() {
     const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
     const [quoteOpen, setQuoteOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-    const lastScrollY = useRef(0);
-
-    useEffect(() => {
-        let ticking = false;
-        const handleScroll = () => {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(() => {
-                setScrolled(window.scrollY > 50);
-                lastScrollY.current = window.scrollY;
-                ticking = false;
-            });
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     return (
         <>
-            <header
-                className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-                    scrolled ? 'border-b border-white/[0.06] bg-black/90 backdrop-blur-md' : 'bg-transparent'
-                }`}>
-                <div className='mx-auto flex h-16 max-w-[1280px] items-center justify-between px-4 md:h-20 md:px-8'>
+            <header className='bg-background fixed top-0 z-50 w-full border-b border-white/[0.06]'>
+                <div className='mx-auto flex h-16 max-w-[1280px] items-center justify-between px-4 md:px-8'>
                     {/* Logo */}
                     <Link href='/' className='flex items-center'>
-                        <HeaderLogo className='h-12 w-12 drop-shadow-lg md:h-14 md:w-14' />
+                        <HeaderLogo className='h-10 w-10' />
                     </Link>
 
                     {/* Desktop nav */}

@@ -43,20 +43,37 @@ export function V2TrustBar({ logos }: V2TrustBarProps) {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6 }}>
-            {/* Subtle gradient line accent at top */}
-            <div className='via-accent/30 absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent to-transparent' />
+            {/* Subtle gradient line accent at top — draws in from center */}
+            <motion.div
+                className='via-accent/30 absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent to-transparent'
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            />
 
-            <p className='mb-5 text-center text-[11px] font-semibold tracking-[0.2em] text-white/60 uppercase'>
+            <motion.p
+                className='mb-5 text-center text-[11px] font-semibold tracking-[0.2em] text-white/60 uppercase'
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}>
                 {brandAnimatedR("Trusted by Toronto's Best")}
-            </p>
+            </motion.p>
             <Marquee className='[--duration:100s]'>
                 {displayLogos.map((logo, idx) => (
                     <LogoItem key={`${logo.name}-${idx}`} logo={logo} />
                 ))}
             </Marquee>
 
-            {/* Subtle gradient line accent at bottom */}
-            <div className='via-accent/30 absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-transparent to-transparent' />
+            {/* Subtle gradient line accent at bottom — draws in from center */}
+            <motion.div
+                className='via-accent/30 absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-transparent to-transparent'
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            />
         </motion.section>
     );
 }
