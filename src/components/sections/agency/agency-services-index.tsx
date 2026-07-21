@@ -76,9 +76,25 @@ function ServiceRow({ index }: { index: number }) {
 
 /* Bold services index on the homepage → links to the Services page. */
 export function AgencyServicesIndex() {
+    const reduced = useReducedMotion();
+
     return (
-        <section className='py-20 md:py-28'>
-            <div className='grid-layout'>
+        <section className='relative overflow-hidden py-20 md:py-28'>
+            {/* Smoke video blended into the section background (same as portfolio) */}
+            <div className='pointer-events-none absolute inset-0 z-0'>
+                <video
+                    src='/smoke-loop.mp4'
+                    autoPlay={!reduced}
+                    muted
+                    loop
+                    playsInline
+                    preload='auto'
+                    className='h-full w-full object-cover opacity-40 mix-blend-screen'
+                />
+                <div className='from-background via-background/30 to-background absolute inset-0 bg-gradient-to-b' />
+            </div>
+
+            <div className='relative z-10 grid-layout'>
                 {/* Header */}
                 <div className='col-span-full mb-8 flex items-end justify-between border-b border-white/15 pb-4 lg:col-start-2 lg:col-end-12'>
                     <div>

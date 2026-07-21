@@ -450,3 +450,73 @@
         transform: none;
     }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   HANZA MOTION SYSTEM — shared easing + progressive text/block reveals
+   ───────────────────────────────────────────────────────────── */
+:root {
+    --ease-hanza: cubic-bezier(0.16, 1, 0.3, 1);
+    --reveal-duration: 760ms;
+}
+
+/* Lenis smooth-scroll wiring */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+/* Per-token reveal (RevealText). Tokens rest hidden and ease in when the
+   container gains .is-revealed. fill is implicit via transition (no keyframes). */
+.reveal-token {
+    display: inline-block;
+    white-space: pre;
+    opacity: 0;
+    transform: translateY(var(--reveal-rise, 0.8em));
+    filter: blur(var(--reveal-blur, 0px));
+    transition:
+        opacity var(--reveal-duration) var(--ease-hanza) var(--reveal-delay, 0ms),
+        transform var(--reveal-duration) var(--ease-hanza) var(--reveal-delay, 0ms),
+        filter var(--reveal-duration) var(--ease-hanza) var(--reveal-delay, 0ms);
+    will-change: opacity, transform, filter;
+}
+.reveal-word {
+    display: inline-block;
+    white-space: nowrap;
+}
+.is-revealed .reveal-token {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+/* Block reveal (Reveal). */
+.reveal-block {
+    opacity: 0;
+    transform: translate3d(var(--reveal-x, 0px), var(--reveal-y, 40px), 0);
+    transition:
+        opacity var(--reveal-duration) var(--ease-hanza) var(--reveal-delay, 0ms),
+        transform var(--reveal-duration) var(--ease-hanza) var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+}
+.reveal-block.is-revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-token,
+    .reveal-block {
+        transition-duration: 0.01ms !important;
+        transform: none !important;
+        filter: none !important;
+    }
+}

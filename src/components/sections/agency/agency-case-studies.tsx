@@ -8,7 +8,7 @@ import { MatrixText } from '@/components/ui/matrix-text';
 import type { PortfolioItem } from '@/content/types';
 
 import { ArrowUpRight, Pause, Play, Plus, Volume2, VolumeX, X } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { createPortal } from 'react-dom';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -216,10 +216,27 @@ export function AgencyCaseStudies({
     viewAllHref?: string;
 }) {
     const [active, setActive] = useState<PortfolioItem | null>(null);
+    const reduced = useReducedMotion();
 
     return (
-        <section className='relative py-16 md:py-24'>
-            <div className='mx-auto max-w-[var(--max-width-content)] px-4 md:px-8'>
+        <section className='relative overflow-hidden py-16 md:py-24'>
+            {/* Smoke video blended into the section background */}
+            <div className='pointer-events-none absolute inset-0 z-0'>
+                {/* Boomerang loop (forward + reversed) → no visible reset */}
+                <video
+                    src='/smoke-loop.mp4'
+                    autoPlay={!reduced}
+                    muted
+                    loop
+                    playsInline
+                    preload='auto'
+                    className='h-full w-full object-cover opacity-40 mix-blend-screen'
+                />
+                {/* fade the smoke into the section at top & bottom for legibility */}
+                <div className='from-background via-background/30 to-background absolute inset-0 bg-gradient-to-b' />
+            </div>
+
+            <div className='relative z-10 mx-auto max-w-[var(--max-width-content)] px-4 md:px-8'>
                 {/* Header */}
                 <div className='mb-12 flex flex-col items-center text-center md:mb-16'>
                     <p className='text-accent mb-3 text-sm font-medium tracking-widest uppercase'>Portfolio</p>

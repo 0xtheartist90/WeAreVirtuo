@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { MatrixText } from '@/components/ui/matrix-text';
 import { visibilityChannels } from '@/content/agency';
 
+import { ScrollProgress } from '@/components/ui/scroll-progress';
+
 import { ArrowUpRight, Bot, MapPin, MessageSquare, Plus, Search, Sparkles, Target } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 
@@ -53,7 +55,7 @@ export function AgencyApproach() {
         <section
             ref={sectionRef}
             id='approach'
-            className='bg-accent relative z-20 -mt-[7vh] overflow-hidden text-white shadow-[0_-40px_80px_-24px_rgba(0,0,0,0.65)]'>
+            className='bg-accent relative z-20 overflow-hidden text-white'>
             {/* Curtain: dark panel carries over from the section above, then peels
                 up to reveal the red — a premium layered transition into the section. */}
             <motion.div
@@ -76,7 +78,10 @@ export function AgencyApproach() {
                         [ <MatrixText as='span' trigger='view'>Beyond Traditional SEO</MatrixText> ]
                     </span>
                     <span className='hidden md:inline'>Search · Maps · AI · Ads</span>
-                    <span>2019–26 ©</span>
+                    <span className='flex items-center gap-3'>
+                        2019–26 ©
+                        <ScrollProgress targetId='approach' className='shrink-0' />
+                    </span>
                 </div>
 
                 {/* ── Oversized headline, top-right ── */}

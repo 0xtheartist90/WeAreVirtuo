@@ -23,3 +23,32 @@ export const NICHE_TIMING = {
 } as const;
 
 export type NicheKey = keyof typeof NICHE_TIMING;
+
+/* ─────────────────────────────────────────────────────────────
+   HANZA-STYLE PREMIUM MOTION SYSTEM
+   One easing curve + a slow, deliberate timing scale for every
+   scroll reveal, deck transform, and progress fill on the site.
+   ───────────────────────────────────────────────────────────── */
+
+// Strong ease-out, no overshoot — the single shared curve.
+export const HANZA_EASE = [0.16, 1, 0.3, 1] as const;
+export const HANZA_EASE_CSS = 'cubic-bezier(0.16, 1, 0.3, 1)';
+
+export const HANZA = {
+    ease: HANZA_EASE,
+    easeCss: HANZA_EASE_CSS,
+    // Reveal durations are slow (600–900ms), never snappy.
+    duration: {
+        reveal: 760, // per-token / block reveals (ms)
+        deck: 820 // deck card transforms (ms)
+    },
+    // Stagger between tokens / items (ms).
+    stagger: {
+        char: 38,
+        word: 64,
+        item: 70
+    }
+} as const;
+
+/** clamp helper shared by scroll-scrubbed sections. */
+export const clamp = (v: number, min = 0, max = 1) => Math.min(max, Math.max(min, v));

@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Bebas_Neue, Inter } from 'next/font/google';
 
 import '@/app/globals.css';
+import { SmoothScroll } from '@/components/providers/smooth-scroll';
 import { SiteNav } from '@/components/ui/site-nav';
 
 const inter = Inter({
@@ -34,8 +35,10 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
         <html lang='en' className='dark' suppressHydrationWarning>
             <body
                 className={`${inter.variable} ${bebasNeue.variable} bg-background text-foreground overscroll-none font-sans antialiased`}>
-                <SiteNav />
-                {children}
+                <SmoothScroll>
+                    <SiteNav />
+                    {children}
+                </SmoothScroll>
             </body>
         </html>
     );

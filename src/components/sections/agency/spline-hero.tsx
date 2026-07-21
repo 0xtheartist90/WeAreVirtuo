@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, lazy, useEffect, useRef } from 'react';
+import { Suspense, lazy } from 'react';
 
 import { ChevronDown } from 'lucide-react';
 
@@ -15,28 +15,12 @@ interface SplineHeroProps {
 }
 
 export function SplineHero({ asBackground = false }: SplineHeroProps) {
-    const wrapRef = useRef<HTMLDivElement>(null);
-
-    // Let wheel/scroll pass through to the page while keeping pointer-drag on the
-    // 3D scene. A window-level capture listener fires before Spline's own wheel
-    // handler; stopping propagation there prevents Spline from consuming the
-    // scroll, so the browser performs its native page scroll instead.
-    useEffect(() => {
-        const onWheel = (e: WheelEvent) => {
-            const wrap = wrapRef.current;
-            if (wrap && e.target instanceof Node && wrap.contains(e.target)) {
-                e.stopPropagation();
-            }
-        };
-        window.addEventListener('wheel', onWheel, { capture: true, passive: true });
-
-        return () => window.removeEventListener('wheel', onWheel, { capture: true });
-    }, []);
-
-    // Shared interactive scene layer — drag works; touch-action pan-y lets vertical
-    // swipes scroll the page while horizontal gestures still rotate.
+    // Decorative scene: pointer-events-none so wheel + touch pass straight through
+    // to Lenis / the page. (Capturing wheel here fought the smooth-scroll engine and
+    // made scrolling hang/glitch over the section.) The scene still plays its idle
+    // animation on its own.
     const scene = (
-        <div ref={wrapRef} className='absolute inset-0' style={{ touchAction: 'pan-y' }}>
+        <div className='pointer-events-none absolute inset-0'>
             <Suspense
                 fallback={
                     <div className='absolute inset-0 grid place-items-center'>
